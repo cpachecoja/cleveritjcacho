@@ -1,0 +1,42 @@
+Feature: Validar el request para crear una transacción
+  Scenario: Crear una request valido
+    Given tengo un JSON request válido
+    When hago un POST al endpoint de la API
+    Then debería recibir una respuesta exitosa con código 200
+    
+    
+Feature: Validar el request sin "agreement"
+  Scenario: Crear una request sin "agreement"
+    Given tengo un JSON request sin "agreement"
+    When hago un POST al endpoint de la API
+    Then debería recibir una respuesta de error indicando que "agreement" esta faltando
+
+Feature: Validar el formato de  "expirationDate"
+  Scenario: Crear una transacción con "expirationDate" en un formato inválido
+    Given tengo un JSON request con "expirationDate" en un formato inválido
+    When hago un POST al endpoint de la API
+    Then debería recibir una respuesta de error indicando un formato de fecha válido
+    
+Feature: Validar el request con "dni" invalido
+  Scenario: Crear una transacción con "dni" excede el numero de digitos
+    Given tengo un JSON request con "dni" invalido
+    When hago un POST al endpoint de la API
+    Then debería recibir una respuesta de error indicando que "dni" no es una cadena valida
+    
+Feature: Validar el request sin "amount"
+  Scenario: Crear una transacción sin "amount"
+    Given tengo un JSON request sin "amount"
+    When hago un POST al endpoint de la API
+    Then debería recibir una respuesta de error indicando que "amount" es requerido    
+    
+Feature: Validar el formato de "storeId"
+  Scenario: Crear una transacción con "storeId" invalido
+    Given tengo un JSON request con "storeId" invalido
+    When hago un POST al endpoint de la API
+    Then debería recibir una respuesta de error indicando que "storeId" debe ser un número valido
+
+Feature: Validar el formato de "sku"
+	Scenario: Crear una transacción con "sku" invalido
+    Given tengo un JSON request con "sku" invalido
+    When hago un POST al endpoint de la API
+    Then debería recibir una respuesta de error indicando que "sku" debe ser una cadena valida 
